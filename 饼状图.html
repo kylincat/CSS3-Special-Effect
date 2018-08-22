@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>饼状图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            text-align: center;
+            font: bold 26px Arial;
+        }
+        .circle {
+            width: 150px;
+            height: 150px;
+            background-color: greenyellow;
+            background-image: linear-gradient(to right, transparent 50%, #655 50%);
+            border-radius: 50%;
+            margin: 150px auto 40px;
+        }
+        .circle:before {
+            content: "";
+            display: block;
+            height: 100%;
+            background-color: greenyellow;
+            margin-left: 50%;
+            border-radius: 0 100% 100% 0 / 0 50% 50% 0;
+            transform-origin: left;
+            animation: pie 50s linear infinite, bg 100s step-end infinite;
+            animation-play-state: paused;
+            /* 伪元素不能被DOM操作，故DOM不能直接控制伪元素的样式，所以采用间接的方式控制，也就是先让它继承父元素的样式，然后控制它的父元素， */
+            animation-delay: inherit;
+        }
+        @keyframes pie {
+            to{
+                transform: rotate(180deg);
+            }
+        }
+        @keyframes bg {
+            50%{
+                background-color: #655;
+            }
+        }
+        #range {
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="circle" style="animation-delay:-20s;"></div>
+    <input type="range" id="range">
+    <p class="percent">50%</p>
+
+<script>
+    var rangeDom = document.getElementById("range");
+    var circleDom = document.querySelector(".circle");
+    var percentDom = document.querySelector(".percent");
+
+    rangeDom.oninput = function() {
+        circleDom.style.animationDelay = -rangeDom.value + "s";
+        percentDom.innerHTML = rangeDom.value + "%";
+    }
+
+</script>
+</body>
+</html>
