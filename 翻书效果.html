@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>翻书效果</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		body {
+			background-color: #666;
+		}
+		.book {
+			width: 250px;
+			height: 350px;
+			background-color: rgba(255, 0, 0, .5);
+			position: relative;
+			margin: 130px auto;
+			transform-style: preserve-3d;
+			perspective: 1200px;
+		}
+		/*.book:hover #page1 {
+			transition: 2s;
+			transform: rotateY(-145deg);
+		}*/
+		#page1, #page2, #page3, #page4 {
+			transform-origin: left;
+			transform-style: preserve-3d;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		#page1 {
+			z-index: 4;
+		}
+		#page2 {
+			z-index: 3;
+		}
+		#page3 {
+			z-index: 2;
+		}
+		#page4 {
+			z-index: 1;
+		}
+		.page-front {
+			width: 250px;
+			height: 350px;
+			background-color: greenyellow;
+			font: bold 36px/350px Arial;
+			text-align: center;
+			border: solid 10px #fff;
+			backface-visibility: hidden;
+		}
+		.page-back {
+			width: 250px;
+			height: 350px;
+			background-color: #f0f0f0;
+			border: solid 10px #fff;
+		}
+		.page-front, .page-back {
+			position: absolute;
+			left: 0;
+			top: 0;
+			box-sizing: border-box;
+		}
+	</style>
+</head>
+<body>
+	<div class="book">
+		<div id="page1">
+			<div class="page-back"></div>
+			<div class="page-front">HTML5</div>
+		</div>
+		<div id="page2">
+			<div class="page-back"></div>
+			<div class="page-front">CSS3</div>
+		</div>
+		<div id="page3">
+			<div class="page-back"></div>
+			<div class="page-front">Javascript</div>
+		</div>
+		<div id="page4">
+			<div class="page-back"></div>
+			<div class="page-front">END</div>
+		</div>
+	</div>
+
+<script>
+	var currentIndex = 0;
+    var pagesDom = document.querySelectorAll("[id^='page']");
+
+    var pageNum = pagesDom.length;
+
+    var bookDom = document.querySelector(".book");
+    bookDom.onclick = function () {
+        if(currentIndex > pagesDom.length - 2){
+            for (var i = 0; i < pageNum; i++) {
+                pagesDom[i].style.transform = "rotateY(0deg)";
+            }
+            currentIndex = 0;
+        }else{
+            //        单击翻页
+            pagesDom[currentIndex].style.transition = "2s";
+            pagesDom[currentIndex].style.transform = "rotateY(-145deg)";
+            currentIndex++;
+        }
+    }
+</script>
+</body>
+</html>
