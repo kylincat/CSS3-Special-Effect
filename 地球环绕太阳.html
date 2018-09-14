@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	.sun {
+		width: 120px;
+		height: 120px;
+		background-color: red;
+		border-radius: 50%;
+		text-align: center;
+		line-height: 120px;
+		margin: 200px auto 30px;
+	}
+	.earth {
+		width: 60px;
+		height: 60px;
+		background-color: blue;
+		border-radius: 50%;
+		text-align: center;
+		line-height: 60px;
+		margin: 0 auto;
+		/* transform-origin可设置三个参数X,Y,Z轴的位置，可以设置一个参考点，
+		元素就是相对于这个参考点做出相应的转换，
+		X,Y轴的原点位于元素的左上角（假设元素是矩形），则元素左上角的位置为(0,0),
+		这里需要注意一点，就是Y轴的正方向是向下的，负方向是向上的 */
+		transform-origin: 30px -90px;
+		/* 动画名称 一个周期动画完成所需时间 运动曲线 动画播放次数(animation-iteration-count) 动画是运行或暂停(animation-play-state) */
+		animation: spinning 3s linear infinite paused;
+	}
+	/* 定义动画 */
+	@keyframes spinning {
+		from{transform: rotateZ(0deg);}
+		to{transform:rotateZ(360deg);}
+	}
+	.btn {
+		background-color: black;
+		color: white;
+		width: 80px;
+		height: 50px;
+		cursor: pointer;
+		margin: 20px auto;
+		border-radius: 10px;
+		text-align: center;
+		line-height: 50px;
+
+	}
+	.btn:hover {
+		box-shadow: 0 8px 14px #000;
+	}
+	.running {
+		animation-play-state: running;
+	}
+</style>
+</head>
+
+<body>
+	
+	<div class="sun">sun</div>
+	<div class="earth">earth</div>
+	<div class="btn"><p>开始/暂停</p></div>
+<script>
+console.log(typeof(NaN));
+var btn = document.querySelector(".btn");
+var earth = document.querySelector(".earth")
+btn.onclick = function(){
+	earth.classList.toggle("running");
+}
+</script>
+</body>
+</html>
